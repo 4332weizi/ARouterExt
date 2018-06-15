@@ -11,7 +11,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -26,11 +25,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$versions.supportLibrary"
+    api "com.android.support:support-v4:$versions.supportLibrary"
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "com.android.support.test:runner:$versions.runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso_core"
 
     // ARouter
-    implementation "com.alibaba:arouter-api:$versions.arouter"
+    api("com.alibaba:arouter-api:$versions.arouter.api") {
+        exclude group: 'com.android.support'
+    }
 }
+
+apply from: 'https://raw.githubusercontent.com/4332weizi/mavenUpload/master/mavenUpload.gradle'
